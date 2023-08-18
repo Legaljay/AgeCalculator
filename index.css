@@ -132,7 +132,7 @@
 
     /** media queries for the display for mobile and for larger screens **/
 
-    @media (width > 450px){
+    @media (width > 500px){
         .flex::after{
             content: "";
             width: 100%;
@@ -149,7 +149,7 @@
         
     }
 
-    @media (width <= 450px){
+    @media (width <= 500px){
         .flex {
             justify-content: center;
         }
