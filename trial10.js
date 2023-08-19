@@ -8,43 +8,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     [inputD, inputM, inputY].forEach(input => {
         input.addEventListener('input', () => {
+            localStorage.clear();
             changeBorderColor(true);
             changeTextColor(true);
         });
     });
-
+    
     function updateAgeContent() {
         const date = document.querySelector('#dy');
         const month = document.querySelector('#mnth');
         const year = document.querySelector('#yr');
-
-        const ageDays = localStorage.getItem('ageDays') || '--';
-        const ageMonths = localStorage.getItem('ageMonths') || '--';
-        const ageYears = localStorage.getItem('ageYears') || '--';
-
+    
+        const ageDays = localStorage.getItem('ageDays')? localStorage.getItem('ageDays') : '--';
+        const ageMonths = localStorage.getItem('ageMonths')? localStorage.getItem('ageMonths'): '--';
+        const ageYears = localStorage.getItem('ageYears')? localStorage.getItem('ageYears'):'--';
+    
         const currentAgeDays = date.textContent;
         const currentAgeMonths = month.textContent;
         const currentAgeYears = year.textContent;
-
+    
         date.textContent = ageDays;
         month.textContent = ageMonths;
         year.textContent = ageYears;
-
+    
         if (currentAgeDays !== ageDays) {
-            date.classList.add('pAnimation');
+            date.classList.add('age-value-animation');
         }
         if (currentAgeMonths !== ageMonths) {
-            month.classList.add('pAnimation');
+            month.classList.add('age-value-animation');
         }
         if (currentAgeYears !== ageYears) {
-            year.classList.add('pAnimation');
+            year.classList.add('age-value-animation');
         }
-
+    
         setTimeout(() => {
-            date.classList.remove('pAnimation');
-            month.classList.remove('pAnimation');
-            year.classList.remove('pAnimation');
-        }, 5000);
+            date.classList.remove('age-value-animation');
+            month.classList.remove('age-value-animation');
+            year.classList.remove('age-value-animation');}, 5000);   
+    
     }
 
     function changeBorderColor(valid) {
@@ -130,7 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
             showErrorMessages(
                 inputDD < 1 || inputDD > 31 ? "Must be a valid day" : "",
                 inputMM < 1 || inputMM > 12 ? "Must be a valid month" : "",
-                inputYY < 1800 || inputYY > yy ? "Must be a valid year" : ""
+                inputYY > yy ? "Must be in the past":inputYY < 1800 ? "Must be a valid year" : "" , "",
+                 
             );
 
             // Additional error messages for specific months
@@ -155,10 +157,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (isFutureDate(inputDD, inputMM, inputYY)) {
             showErrorMessages(
                 inputDD > todayDate.getDate() || inputMM > todayDate.getMonth() + 1 || inputYY > todayDate.getFullYear()
-                    ? "The date is in future"
+                    ? "Must be in the past"
                     : "",
-                "The date is in the future",
-                "The date is in the future"
+                "Must be in the past",
+                "Must be in the past"
             );
             changeBorderColor(false);
             changeTextColor(false);
