@@ -31,19 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
         year.textContent = ageYears;
 
         if (currentAgeDays !== ageDays) {
-            date.classList.add('age-value-animation');
+            date.classList.add('pAnimation');
         }
         if (currentAgeMonths !== ageMonths) {
-            month.classList.add('age-value-animation');
+            month.classList.add('pAnimation');
         }
         if (currentAgeYears !== ageYears) {
-            year.classList.add('age-value-animation');
+            year.classList.add('pAnimation');
         }
 
         setTimeout(() => {
-            date.classList.remove('age-value-animation');
-            month.classList.remove('age-value-animation');
-            year.classList.remove('age-value-animation');
+            date.classList.remove('pAnimation');
+            month.classList.remove('pAnimation');
+            year.classList.remove('pAnimation');
         }, 5000);
     }
 
