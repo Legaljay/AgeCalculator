@@ -46,7 +46,7 @@
             display: grid;
             gap: 0;
             grid-template-columns: repeat(3,  1fr);
-            width: max(85%) ;
+            width: max(85%);
         }
         form{
             display: grid;

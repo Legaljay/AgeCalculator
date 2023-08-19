@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
 
         function calculateAge(ageDays, ageMonths, ageYears){
-            if ( ageMonths <= 0) {  //|| (ageMonths === 0 && ageDays < 0)
+            if ( ageMonths <= 0) {
                 ageYears--;
                 
                 ageMonths += 12;
@@ -111,7 +111,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
     
             if (ageDays < 0){
                 const daysInLastMonth = new Date(yy,mm-1,0).getDate();
-                // console.log(daysInLastMonth);
                 ageDays += daysInLastMonth;
                 ageMonths--;
             } 
@@ -135,9 +134,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
         }
 
        
-       
-            
-        // return {years: ageYears, months: ageMonths, days: ageDays};
     });
 
 });

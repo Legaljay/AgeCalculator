@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <link rel="stylesheet" href="pipee.css">
+</head>
+<body>
+    <div class="main">
+      <div id="all">
+            <div class="container"> 
+                <div class="sectionA">
+                    <h4 id="date">DAY</h4>
+                    <h4 id="month">MONTH</h4>
+                    <h4 id="year">YEAR</h4>
+                    <form>
+                        <input id="inputDD" type="number" placeholder="DD" required>
+                        <input id="inputMM" type="number"  placeholder="MM" required>
+                        <input id="inputYY" type="number" placeholder="YYYY" required>
+                    </form>
+                    <span id="invalid"></span>
+                    <span id="invalides"></span>
+                    <span id="invalider"></span>
+                </div> 
+            </div>
+            <div class="flex">
+                <hr/>
+                <img src="assets/images/icon-arrow.svg" class="btn" alt="an image representing a button"/>
+            </div>
+            <div class="txt">
+                <p><i><strong><span id="yr" class="text">--</span> years</strong></i></p>
+                <p><i><strong><span id="mnth" class="text">--</span> months</strong></i></p>
+                <p><i><strong><span id="dy" class="text">--</span> days</strong></i></p>
+            </div>
+
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

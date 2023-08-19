@@ -1,58 +1,3 @@
-// let presentDate = [dd, mm, yy];
-
-// console.log(presentDate);
-
-// let varDD = inputDD.addEventListener('input', (e) => e.target.value);
-// let varMM = inputMM.addEventListener('input', (e) => e.target.value);
-// let varYY = inputYY.addEventListener('input', (e) => e.target.value);
-
-// let convertToDate = [varDD, varMM, varYY];
-// console.log(convertToDate);
-
-
-
-/*inputDD.addEventListener('input', (event) => 
-{let valDD = event.target.value;
-    date.textContent= valDD;
-});
-
-inputMM.addEventListener('input', (event) =>
-{let valMM = event.target.value;
-    month.textContent = valMM;
-});
-
-inputYY.addEventListener('input', (event) =>
-{let valYY = event.target.value;
-    year.textContent = valYY;
-});*/
-
-    /*date.textContent = inputDD.value;
-
-    inputDD.addEventListener('input', vaDD);
-    inputMM.addEventListener('input', vaMM);
-    inputYY.addEventListener('input', vaYY);
-
-    function vaDD (event) {
-        let valDD = event.target.value;
-        date.textContent= valDD;
-    }
-    
-    function vaMM (event){
-        let valMM = event.target.value;
-        month.textContent = valMM;
-    }
-    
-    function vaYY(event){
-        let valYY = event.target.value;
-        year.textContent = valYY;
-    }
-
-    button.addEventListener('click', () => {
-    
-        
-});*/
-
-
 
 document.addEventListener('DOMContentLoaded', ()=> {
 
@@ -91,7 +36,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
     function updateAgeContent(){
 
-        if (!localStorage.getItem("ageDays") || !localStorage.getItem("ageMonths") || !localStorage.getItem("ageYears")  ){
+        if (!localStorage.getItem("ageDays") || !localStorage.getItem("ageMonths") || !localStorage.getItem("ageYears")){
 
             date.textContent = "--";
             month.textContent =  "--";
@@ -121,7 +66,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     
     
     
-    button.addEventListener('click', (e) => {  
+    button.addEventListener('click', () => {  
     
         inputDD = parseInt(document.querySelector('#inputDD').value);
         inputMM = parseInt(document.querySelector('#inputMM').value);
@@ -140,7 +85,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     
             console.log(inputDD)
     
-        function validation(e) {
+        function validation() {
             const invalid = document.querySelector('#invalid');
             const invalides = document.querySelector('#invalides');
             const invalider = document.querySelector('#invalider');
@@ -153,9 +98,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
                 invalider.textContent = "This field is required";
 
                 toggleClass();
-                // date.textContent = "--";
-                // month.textContent =  "--";
-                // year.textContent =  "--";
                 updateAgeContent();
                 return
     
@@ -176,22 +118,16 @@ document.addEventListener('DOMContentLoaded', ()=> {
                 invalides.textContent = "Must aa a valid date";
 
                 toggleClass();
-                // date.textContent = "--";
-                // month.textContent =  "--";
-                // year.textContent =  "--";
                 updateAgeContent();
                 return
             
             }
                 
-            if(inputMM === 2 && inputDD > 28 ){
+            if(inputMM == 2 && inputDD > 28 ){
                 invalid.textContent = "Must bb a valid date";
                 invalides.textContent = "Must bb a valid date";
 
                 toggleClass();
-                // date.textContent = "--";
-                // month.textContent =  "--";
-                // year.textContent =  "--";
                 updateAgeContent();
                 return
             }
@@ -219,7 +155,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
         
             if (ageDays < 0){
                 const daysInLastMonth = new Date(yy,mm-1,0).getDate();
-                    // console.log(daysInLastMonth);
                 ageDays += daysInLastMonth;
                 ageMonths--;
             } 
@@ -244,8 +179,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
     
            
            
-                
-            // return {years: ageYears, months: ageMonths, days: ageDays};
     });
     
 });

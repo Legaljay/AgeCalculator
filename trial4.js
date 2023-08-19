@@ -71,19 +71,61 @@ document.addEventListener('DOMContentLoaded', () => {
         const invalid = document.querySelector('#invalid');
         const invalides = document.querySelector('#invalides');
         const invalider = document.querySelector('#invalider');
-
-        function validation() {
-            const isDayMonthValid = inputDD >= 1 && inputDD <= 31 && inputMM >= 1 && inputMM <= 12;
-            const isYearValid = inputYY.toString().length === 4;
+                 
+        function isValidInput(inputDD,inputMM,inputYY) {
             
-            const isInputValid = isDayMonthValid && isYearValid;
+            const isRequired = (!inputDD || !inputMM || !inputYY);
+            const isInvalidDate = (
+                inputDD < 1 || inputDD > 31 ||
+                inputMM < 1 || inputMM > 12 ||
+                inputYY < 1800 || inputYY > yy
+            );
 
-            invalid.textContent = !isInputValid ? 'This field is required' : '';
-            invalides.textContent = !isDayMonthValid ? 'Must be two digits' : '';
-            invalider.textContent = !isYearValid ? 'Must be four digits' : '';
+            if (isRequired) {
+                invalid.textContent = "This field is required";
+                invalides.textContent = "This field is required";
+                invalider.textContent = "This field is required";
+                return;
+            }
 
-            changeBorderColor(isInputValid);
-            changeTextColor(isInputValid);
+            if (isInvalidDate) {
+                invalid.textContent = "Must be a valid date";
+                invalides.textContent = "Must be a valid date";
+                invalider.textContent = "Must be a valid date";
+                return;
+            }
+
+            if (inputMM == 2 && inputDD > 28) {
+                invalid.textContent = "Must be a valid date";
+                return;
+            }
+
+            if ((inputMM == 4 || inputMM == 6 || inputMM == 9 || inputMM == 11) && inputDD > 30) {
+                invalid.textContent = "Must be a valid date";
+                return;
+            }
+
+            if (inputYY < yy) {
+                invalider.textContent = "Must be a valid date";
+                return;
+            }
+
+            if (inputYY == yy && inputMM < mm) {
+                invalides.textContent = "Must be a valid date";
+                invalider.textContent = "Must be a valid date";
+                return;
+            }
+
+            if (inputYY == yy && inputMM == mm && inputDD < dd) {
+                invalid.textContent = "Must be a valid date";
+                invalides.textContent = "Must be a valid date";
+                invalider.textContent = "Must be a valid date";
+                return;
+            }
+
+
+            changeBorderColor();
+            changeTextColor();
             updateAgeContent();
 
             if (!isInputValid) {
@@ -121,6 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateAgeContent();
         }
 
-        validation();
+        isValidInput();
     });
 });
