@@ -8,38 +8,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     [inputD, inputM, inputY].forEach(input => {
         input.addEventListener('input', () => {
-            //localStorage.clear();
             changeBorderColor(true);
             changeTextColor(true);
         });
     });
-    
+
     function updateAgeContent() {
         const date = document.querySelector('#dy');
         const month = document.querySelector('#mnth');
         const year = document.querySelector('#yr');
-    
-        /**const ageDays = localStorage.getItem('ageDays') || '--';
-        const ageMonths = localStorage.getItem('ageMonths')|| '--';
-        const ageYears = localStorage.getItem('ageYears') || '--';**/
 
-        //**
-        const ageDays = !localStorage.getItem('ageDays')? '--' : localStorage.getItem('ageDays');
-        const ageMonths = !localStorage.getItem('ageMonths')? '--' : localStorage.getItem('ageMonths');
-        const ageYears = !localStorage.getItem('ageYears')? '--' : localStorage.getItem('ageYears');
-        
-        //**/
-    
+        const ageDays = localStorage.getItem('ageDays') || '--';
+        const ageMonths = localStorage.getItem('ageMonths') || '--';
+        const ageYears = localStorage.getItem('ageYears') || '--';
+
         const currentAgeDays = date.textContent;
         const currentAgeMonths = month.textContent;
         const currentAgeYears = year.textContent;
-    
+
         date.textContent = ageDays;
         month.textContent = ageMonths;
         year.textContent = ageYears;
 
-        
-    
         if (currentAgeDays !== ageDays) {
             date.classList.add('age-value-animation');
         }
@@ -49,34 +39,35 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentAgeYears !== ageYears) {
             year.classList.add('age-value-animation');
         }
-    
+
         setTimeout(() => {
             date.classList.remove('age-value-animation');
             month.classList.remove('age-value-animation');
-            year.classList.remove('age-value-animation');}, 5000);   
-    
-    }
-
-    const removeFromLocalStorage = () => {
-
-        localStorage.removeItem('ageDays');
-        localStorage.removeItem('ageMonths');
-        localStorage.removeItem('ageYears');
+            year.classList.remove('age-value-animation');
+        }, 5000);
     }
 
     function changeBorderColor(valid) {
         const inpute = document.querySelectorAll('input');
         inpute.forEach(input => {
-            input.style.borderColor = valid ? 'var(--smokey-grey)' : 'red';
+            input.style.borderColor = valid ? 'var(--Light-grey)' : 'var(--Light-red)';
         });
     }
 
     function changeTextColor(valid) {
         const textCol = document.querySelectorAll('label');
         textCol.forEach(label => {
-            label.style.color = valid ? 'var(--smokey-grey)' : 'red';
+            label.style.color = valid ? 'var(--smokey-grey)' : 'var(--Light-red)';
+        });
+        
+        const inpute = document.querySelectorAll('input');
+        inpute.forEach(input => {
+            const inputIsEmpty = input.value.trim() === '';
+            input.style.color = inputIsEmpty ? 'var(--Smokey-grey)' : 'black';
+            input.style.fontWeight = inputIsEmpty ? 'normal' : 'bold';
         });
     }
+    
 
     button.addEventListener('click', () => {
         const inputDD = parseInt(inputD.value);
@@ -141,19 +132,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 isMMRequired ? "This field is required" : "",
                 isYYRequired ? "This field is required" : ""
             );
+
+            // Clear the age values if input is incorrect
+            localStorage.removeItem('ageDays');
+            localStorage.removeItem('ageMonths');
+            localStorage.removeItem('ageYears');
+            
+            updateAgeContent(); // This will update the age values to show "--"
+            
             changeBorderColor(false);
             changeTextColor(false);
-            // Clear the age values if input is incorrect
-            removeFromLocalStorage();
-            updateAgeContent(); // This will update the age values to show "--"
         } else if (!isValidDate(inputDD, inputMM, inputYY)) {
             showErrorMessages(
                 inputDD < 1 || inputDD > 31 ? "Must be a valid day" : "",
                 inputMM < 1 || inputMM > 12 ? "Must be a valid month" : "",
-                inputYY > yy ? "Must be in the past":inputYY < 1800 ? "Must be a valid year" : "" , "",
-                 
+        
+                inputYY > yy ? "Must be in the past" : inputYY < 1800 ? "Must be a valid year" : ""
             );
 
+            // Clear the age values if input is incorrect
+            localStorage.removeItem('ageDays');
+            localStorage.removeItem('ageMonths');
+            localStorage.removeItem('ageYears');
+            
+            updateAgeContent(); // This will update the age values to show "--"
+            
             // Additional error messages for specific months
             if ([2].includes(inputMM) && inputDD > 28) {
                 showErrorMessages("Must be a valid date", "", "");
@@ -173,20 +176,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
             changeBorderColor(false);
             changeTextColor(false);
-            removeFromLocalStorage();
-           updateAgeContent(); // This will update the age values to show "--"
         } else if (isFutureDate(inputDD, inputMM, inputYY)) {
             showErrorMessages(
                 inputDD > todayDate.getDate() || inputMM > todayDate.getMonth() + 1 || inputYY > todayDate.getFullYear()
-                    ? "Must be in the past"
+                    ? "The date is in the future"
                     : "",
-                "Must be in the past",
-                "Must be in the past"
+                "The date is in the future",
+                "The date is in the future"
             );
+
+            // Clear the age values if input is incorrect
+            localStorage.removeItem('ageDays');
+            localStorage.removeItem('ageMonths');
+            localStorage.removeItem('ageYears');
+            
+            updateAgeContent(); // This will update the age values to show "--"
+            
             changeBorderColor(false);
             changeTextColor(false);
-            removeFromLocalStorage();
-            updateAgeContent(); // This will update the age values to show "--"
         } else {
             clearErrorMessages();
 
@@ -199,10 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('ageDays', age.days);
             localStorage.setItem('ageMonths', age.months);
             localStorage.setItem('ageYears', age.years);
-
-            localStorage.setItem('inputDD', inputDD);
-            localStorage.setItem('inputMM', inputMM);
-            localStorage.setItem('inputYY', inputYY);
 
             updateAgeContent();
         }
