@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function changeBorderColor(valid) {
         const inpute = document.querySelectorAll('input');
         inpute.forEach(input => {
-            input.style.borderColor = valid ? 'var(--smokey-grey)' : 'red';
+            input.style.borderColor = valid ? 'grey' : 'red';
         });
     }
 

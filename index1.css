@@ -198,20 +198,13 @@
 
         .tracking-in-contract-bck{-webkit-animation:tracking-in-contract-bck 1s cubic-bezier(.215,.61,.355,1.000) both;animation:tracking-in-contract-bck 1s cubic-bezier(.215,.61,.355,1.000) both}
 
-        .span{
-            color: var(--Light-red);
-        }
-
         @-webkit-keyframes tracking-in-contract-bck{0%{letter-spacing:1em;transform:translateZ(400px);opacity:0}40%{opacity:.6}100%{transform:translateZ(0);opacity:1}}@keyframes tracking-in-contract-bck{0%{letter-spacing:1em;transform:translateZ(400px);opacity:0}40%{opacity:.6}100%{transform:translateZ(0);opacity:1}}
-
-        .tracking-in-contract-bck{-webkit-animation:tracking-in-contract-bck 1s cubic-bezier(.215,.61,.355,1.000) both;animation:tracking-in-contract-bck 1s cubic-bezier(.215,.61,.355,1.000) both}
-
         .span{
             color: var(--Light-red);
             font-style: italic;
             font-weight: lighter;
             font-size: small;
-}
+        }
 
     /** Hover Effects at necessary parts of the UI **/
         
@@ -226,8 +219,13 @@
             color: var(--off-black);
         }
         .input:not(:hover){
+            border: 1px solid var(--Light-grey);
             color: var(--off-black);
+            outline: none;
         }
+        /*.input:hover{
+            border: 1px solid var(--Light-grey);
+        }*/
 
     /** media queries for the display for mobile and for larger screens **/
     @media (min-width: 800.01px) and (max-width: 2000px){ 
