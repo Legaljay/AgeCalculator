@@ -36,7 +36,7 @@
             margin-inline: auto;
             margin-block: 8em;
             border-radius: 40px;
-            border-bottom-right-radius:200px !important;
+            border-bottom-right-radius:150px !important;
             display: flex;
             flex-direction: column;
             -webkit-border-radius: 40px;
@@ -67,6 +67,8 @@
         label{
             width: max(33%); 
             margin:0.5em 0;
+            font-weight: bold;
+            color: var(--smokey-grey);
             
         }
         .input{
@@ -168,7 +170,7 @@
             animation: countUp 5s ease forwards;
             -webkit-animation: countUp 5s ease forwards;
         }
-        
+
         /*** Animation for the button***/
         @-webkit-keyframes heartbeat{
             from{-webkit-transform:scale(1);
